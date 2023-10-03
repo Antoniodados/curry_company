@@ -5,9 +5,11 @@ import folium
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+import datetime as dt
 from haversine import haversine
 from PIL import Image
 from streamlit_folium import folium_static
+from datetime import datetime
 
 st.set_page_config( page_title = "Visão Empresa", page_icon= "", layout= "wide" )
 
@@ -229,9 +231,9 @@ st.sidebar.markdown("""---""")
 st.sidebar.markdown('## Selecione uma data limite')
 date_slider = st.sidebar.slider(
     'Até qual valor?',
-    value=pd.datetime(2022,4,13),
-    min_value=pd.datetime(2022,2,11),
-    max_value=pd.datetime(2022,4,6),
+    value=datetime(2022,4,13),
+    min_value=datetime(2022,2,11),
+    max_value=datetime(2022,4,6),
     format='DD-MM-YYYY')
 
 st.sidebar.markdown("""---""")
@@ -240,6 +242,14 @@ traffic_options = st.sidebar.multiselect(
     'Quais as condições do trânsito',
     ['Low', 'Medium', 'High' , 'Jam'],
     default =  ['Low', 'Medium', 'High' , 'Jam'])
+
+st.sidebar.markdown("""---""")
+
+Weatherconditions_options = st.sidebar.multiselect(
+    'Quais as condições do clima',
+    ['conditions Sunny', 'conditions Stormy', 'conditions Sandstorms' , 'conditions Cloudy' , 'conditions Fog', 'conditions Windy'],
+    default =  ['conditions Sunny', 'conditions Stormy', 'conditions Sandstorms' , 'conditions Cloudy' , 'conditions Fog', 'conditions Windy'])
+
 st.sidebar.markdown("""---""")
 st.sidebar.markdown('### Powerd by Comunidade DS')
 
@@ -249,6 +259,10 @@ df1 = df1.loc[linhas_selecionadas, :]
 
 #Filtro de Trânsito
 linhas_selecionadas = df1['Road_traffic_density'].isin(traffic_options)
+df1 = df1.loc[linhas_selecionadas, :]
+
+#Filtro de Clima
+linhas_selecionadas = df1['Weatherconditions'].isin(Weatherconditions_options)
 df1 = df1.loc[linhas_selecionadas, :]
 
 # ============================================================================================
