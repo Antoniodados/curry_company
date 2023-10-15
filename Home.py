@@ -23,7 +23,7 @@ st.markdown(
     ### Como utilizar esse Growth Dashboard?
     - Visão Empresa:
         - Visão Gerencial: Métricas gerais de comportamento.
-        - Visão Tática: Indicadores semanais de crecimento.
+        - Visão Tática: Indicadores semanais de crescimento.
         - Visão Geográfica: Insights de geolocalização.
     - Visão Entregador:
         - Acompanhamento dos indicadores semanais de crescimento.
